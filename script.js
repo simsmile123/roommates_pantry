@@ -1,44 +1,51 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('add-requirement-form');
-    const input = document.getElementById('requirement-input');
-    const requirementsList = document.getElementById('requirements-list');
+    // Retrieve all containers and their associated forms and lists
+    const containers = document.querySelectorAll('.container');
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+    // Iterate over each container
+    containers.forEach((container, index) => {
+        const form = container.querySelector('.add-requirement-form');
+        const input = container.querySelector('.requirement-input');
+        const requirementsList = container.querySelector('.requirements-list');
 
-        const requirementText = input.value.trim();
+        // Add event listener to the form inside each container
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        if (requirementText !== '') {
-            addRequirement(requirementText);
-            input.value = '';
-        }
-    });
+            const requirementText = input.value.trim();
 
-    function addRequirement(text) {
-        const requirementItem = document.createElement('div');
-        requirementItem.classList.add('requirement');
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-
-        const label = document.createElement('label');
-        label.textContent = text;
-
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove';
-        removeButton.addEventListener('click', function () {
-            const password = prompt('Enter the password to remove this requirement:');
-            if (password === 'ABC') {
-                requirementsList.removeChild(requirementItem);
-            } else {
-                alert('Incorrect password. Requirement not removed.');
+            if (requirementText !== '') {
+                addRequirement(requirementText, requirementsList);
+                input.value = '';
             }
         });
 
-        requirementItem.appendChild(checkbox);
-        requirementItem.appendChild(label);
-        requirementItem.appendChild(removeButton);
+        function addRequirement(text, list) {
+            const requirementItem = document.createElement('div');
+            requirementItem.classList.add('requirement');
 
-        requirementsList.appendChild(requirementItem);
-    }
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+
+            const label = document.createElement('label');
+            label.textContent = text;
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.addEventListener('click', function () {
+                const password = prompt('Enter the password to remove this requirement:');
+                if (password === 'ABC') {
+                    list.removeChild(requirementItem);
+                } else {
+                    alert('Incorrect password. Requirement not removed.');
+                }
+            });
+
+            requirementItem.appendChild(checkbox);
+            requirementItem.appendChild(label);
+            requirementItem.appendChild(removeButton);
+
+            list.appendChild(requirementItem);
+        }
+    });
 });
