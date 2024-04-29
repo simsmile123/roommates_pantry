@@ -1,34 +1,44 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+body, html {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 .container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 50%;
+    overflow: hidden;
 }
 
-h1 {
-    text-align: center;
+.container:nth-child(1),
+.container:nth-child(2),
+.container:nth-child(3) {
+    display: flex;
+}
+
+.container:nth-child(4),
+.container:nth-child(5) {
+    display: grid;
+}
+
+.container h1 {
+    margin-bottom: 10px;
 }
 
 #requirements-list {
-    margin-bottom: 20px;
+    overflow-y: auto;
 }
 
-.requirement {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+form {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
 }
 
-.requirement input[type="checkbox"] {
+form input[type="text"] {
+    flex: 1;
     margin-right: 10px;
+}
+
+form button {
+    flex-shrink: 0;
 }
